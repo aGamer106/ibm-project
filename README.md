@@ -1,6 +1,6 @@
-# untitled
+# IBM Group C project
 
-A new Flutter project.
+<ADD BRIEF DESCRIPTION HERE> 
 
 ## Getting Started
 
