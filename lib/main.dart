@@ -90,7 +90,11 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: ModelViewer(src: 'avatars/Astronaut.glb')
+        child: ModelViewer(
+            src: 'avatars/Astronaut.glb',
+          autoRotate: true,
+          ar: true,
+        )
 
       ),
       floatingActionButton: FloatingActionButton(
