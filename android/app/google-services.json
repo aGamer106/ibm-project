@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "191934931736",
+    "project_id": "ibm-group-c",
+    "storage_bucket": "ibm-group-c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191934931736:android:759aef3382482a206b346d",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZle2D58-dsDmpA26KkNOvU08cU-iV7S4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
