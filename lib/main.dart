@@ -69,6 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // void onClick(){
+  //   print('Model clicked! Switching to next screen...');
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,14 +83,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: const Column(
         children: [
           Expanded(
+            flex: 1,
             child: ModelViewer(
               src: 'avatars/Astronaut.glb',
               autoRotate: true,
               ar: true,
               cameraControls: true,
+
             ),
           ),
           Expanded(
+            flex: 2,
             child: ModelViewer(
               src: 'avatars/BusinessCard3D.glb',
               autoRotate: false,
