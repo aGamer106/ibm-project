@@ -2,8 +2,19 @@
 //new structure with the latest updates can be found below:
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'qr_scanner_overlay.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+        apiKey: 'AIzaSyCZle2D58-dsDmpA26KkNOvU08cU-iV7S4',
+        appId: '1:191934931736:android:759aef3382482a206b346d',
+        messagingSenderId: '191934931736',
+        projectId: 'ibm-group-c')
+  );
   runApp(const MyApp());
 }
 
@@ -41,12 +52,23 @@ class _MyHomePageState extends State<MyHomePage> {
         },
             icon: const Icon(Icons.camera_rear_outlined))] //actions performed by the camera - this basically allows the user to switch between front-facing camera to back-facing camera; The icon takes a constant value here for now.
       ),
-      body: MobileScanner(
+      //wrapping everything as a Stack with children - the children of this Stack object will be the MobileScanner
+      body: Stack(children: [MobileScanner(
           allowDuplicates: false,
           controller: cameraController, //pass the controller to the object itself here in order for it to use
-          onDetect: (barcode, args) {
-            debugPrint('Barcode Found! ' + barcode.rawValue!);
-      })
+          onDetect: (barcode, args) async {
+            final String? barcodeValue = barcode.rawValue;
+            debugPrint('Barcode Found! $barcodeValue !');
+
+            if (barcodeValue != null && await canLaunchUrl(Uri.parse(barcodeValue))) {
+              await launchUrl(Uri.parse(barcodeValue));
+            } else {
+              debugPrint('Could not launch $barcodeValue');
+            }
+          }),
+        QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5))
+      ]),
+        //the closer to the end of the list, the higher the priority on the stream, showing on top of everything else
     );
   }
 }
