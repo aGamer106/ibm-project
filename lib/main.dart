@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Avatar Display'),
     );
   }
 }
@@ -77,31 +77,43 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: ModelViewer(
-            src: 'avatars/Robot.glb',
-          autoRotate: true,
-          ar: true,
-        )
+    //return Scaffold(
+    //  appBar: AppBar(
+     //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+     //   title: Text(widget.title),
+     // ),
+      //body: const Center(
+      //  child: ModelViewer(
+       //     src: 'avatars/BusinessCard3D.glb',
+        //  autoRotate: false,
+         // ar: true,
+         // cameraControls: true,
+        //)
 
-      ),
-      //floatingActionButton: FloatingActionButton(
-        //onPressed: _incrementCounter,
-        //tooltip: 'Increment',
-        //child: const Icon(Icons.add),
-      //), // This trailing comma makes auto-formatting nicer for build methods.
+      //),
+    //);
+
+    return const Row(
+      children: [
+        Expanded(
+          child: ModelViewer(
+             src: 'avatars/Astronaut.glb',
+            autoRotate: true,
+            ar: true,
+            cameraControls: true,
+            ),
+          ),
+        Expanded(
+          child: ModelViewer(
+            src: 'avatars/BusinessCard3D.glb',
+            autoRotate: false,
+            ar: true,
+            cameraControls: true,
+            disableZoom: false,
+            interactionPrompt: InteractionPrompt.none,
+          ),
+        ),
+      ],
     );
   }
 }
