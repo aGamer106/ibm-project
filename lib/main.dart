@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Avatar Display'),
@@ -71,49 +71,43 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    //return Scaffold(
-    //  appBar: AppBar(
-     //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-     //   title: Text(widget.title),
-     // ),
-      //body: const Center(
-      //  child: ModelViewer(
-       //     src: 'avatars/BusinessCard3D.glb',
-        //  autoRotate: false,
-         // ar: true,
-         // cameraControls: true,
-        //)
-
-      //),
-    //);
-
-    return const Row(
-      children: [
-        Expanded(
-          child: ModelViewer(
-             src: 'avatars/Astronaut.glb',
-            autoRotate: true,
-            ar: true,
-            cameraControls: true,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: const Column(
+        children: [
+          Expanded(
+            child: ModelViewer(
+              src: 'avatars/Astronaut.glb',
+              autoRotate: true,
+              ar: true,
+              cameraControls: true,
             ),
           ),
-        Expanded(
-          child: ModelViewer(
-            src: 'avatars/BusinessCard3D.glb',
-            autoRotate: false,
-            ar: true,
-            cameraControls: true,
-            disableZoom: false,
-            interactionPrompt: InteractionPrompt.none,
+          Expanded(
+            child: ModelViewer(
+              src: 'avatars/BusinessCard3D.glb',
+              autoRotate: false,
+              ar: true,
+              cameraControls: true,
+              disableZoom: false,
+              interactionPrompt: InteractionPrompt.none,
+            ),
           ),
-        ),
-      ],
+        ],
+      )
     );
+
+    //return const Center(
+    //     child: ModelViewer(
+    //       src: 'avatars/BusinessCard3D.glb',
+    //       autoRotate: false,
+    //       ar: true,
+    //       cameraControls: true,
+    //     )
+    //
+    // ),
   }
 }
