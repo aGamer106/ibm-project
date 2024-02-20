@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
+import 'package:untitled/ar_screen.dart';
+//import 'package:vector_math/vector_math_64.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,127 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'IBM Business Card',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Avatar Display'),
+      home: ArScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  Color modelColor = Colors.blue;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  // void onClick(){
-  //   print('Model clicked! Switching to next screen...');
-  // }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: const Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: ModelViewer(
-              src: 'avatars/Astro&Card.glb',
-              autoRotate: true,
-              ar: true,
-              cameraControls: true,
-              arPlacement: ArPlacement.floor,
-
-            ),
-          ),
-          // Expanded(
-          //   flex: 2,
-          //   child: ModelViewer(
-          //     src: 'avatars/BusinessCard3D.glb',
-          //     autoRotate: false,
-          //     ar: true,
-          //     cameraControls: true,
-          //     disableZoom: false,
-          //     interactionPrompt: InteractionPrompt.none,
-          //   ),
-          // ),
-        ],
-      )
-    );
-
-
-
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //       appBar: AppBar(
-  //         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-  //         title: Text(widget.title),
-  //       ),
-  //       body: Center(
-  //         child: GestureDetector(
-  //           onTap: (){
-  //             print("Clicked");
-  //           },
-  //           // child: ModelViewer(
-  //           //        src: 'avatars/BusinessCard3D.glb',
-  //           //        autoRotate: false,
-  //           //        ar: true,
-  //           //        cameraControls: true,
-  //           //      ),
-  //         child: Container(
-  //           child: const ModelViewer(
-  //             src: 'avatars/BusinessCard3D.glb',
-  //             autoRotate: false,
-  //             ar: true,
-  //             cameraControls: true,
-  //         ),
-  //         )
-  //         ),
-  //         ),
-  //
-  //       );
-    //);
-
-    //return const Center(
-    //     child: ModelViewer(
-    //       src: 'avatars/BusinessCard3D.glb',
-    //       autoRotate: false,
-    //       ar: true,
-    //       cameraControls: true,
-    //     )
-    //
-    // ),
-  }
-}
