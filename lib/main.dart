@@ -5,6 +5,8 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'qr_scanner_overlay.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'card.dart';
+import 'generate_qr_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,7 +50,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('QRScanner'),
-        actions: [IconButton(onPressed: (){cameraController.switchCamera();
+        actions: [
+
+          IconButton(
+            onPressed: (){
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => GenerateQRScreen()),
+              );
+            },
+            icon: const Icon(Icons.qr_code)
+          ),
+
+          IconButton(onPressed: (){cameraController.switchCamera();
         },
             icon: const Icon(Icons.camera_rear_outlined))] //actions performed by the camera - this basically allows the user to switch between front-facing camera to back-facing camera; The icon takes a constant value here for now.
       ),
@@ -60,10 +74,14 @@ class _MyHomePageState extends State<MyHomePage> {
             final String? barcodeValue = barcode.rawValue;
             debugPrint('Barcode Found! $barcodeValue !');
 
-            if (barcodeValue != null && await canLaunchUrl(Uri.parse(barcodeValue))) {
-              await launchUrl(Uri.parse(barcodeValue));
-            } else {
-              debugPrint('Could not launch $barcodeValue');
+            if (barcodeValue == 1){
+              businessCard testCard= businessCard(
+              phoneNumber: "123",
+              firstName: "Ibrahim",
+              lastName: "Ahmed",
+              jobTitle: "Student",
+              );
+              testCard.displayCard(context);
             }
           }),
         QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5))
