@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'IBM Business Card',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
@@ -71,24 +71,25 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             flex: 1,
             child: ModelViewer(
-              src: 'avatars/Astronaut.glb',
+              src: 'avatars/Astro&Card.glb',
               autoRotate: true,
               ar: true,
               cameraControls: true,
+              arPlacement: ArPlacement.floor,
 
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: ModelViewer(
-              src: 'avatars/BusinessCard3D.glb',
-              autoRotate: false,
-              ar: true,
-              cameraControls: true,
-              disableZoom: false,
-              interactionPrompt: InteractionPrompt.none,
-            ),
-          ),
+          // Expanded(
+          //   flex: 2,
+          //   child: ModelViewer(
+          //     src: 'avatars/BusinessCard3D.glb',
+          //     autoRotate: false,
+          //     ar: true,
+          //     cameraControls: true,
+          //     disableZoom: false,
+          //     interactionPrompt: InteractionPrompt.none,
+          //   ),
+          // ),
         ],
       )
     );
@@ -104,16 +105,22 @@ class _MyHomePageState extends State<MyHomePage> {
   //       body: Center(
   //         child: GestureDetector(
   //           onTap: (){
-  //             setState(() {
-  //               modelColor = Colors.purple;
-  //             });
+  //             print("Clicked");
   //           },
-  //           child: ModelViewer(
-  //                  src: 'avatars/BusinessCard3D.glb',
-  //                  autoRotate: false,
-  //                  ar: true,
-  //                  cameraControls: true,
-  //                ),
+  //           // child: ModelViewer(
+  //           //        src: 'avatars/BusinessCard3D.glb',
+  //           //        autoRotate: false,
+  //           //        ar: true,
+  //           //        cameraControls: true,
+  //           //      ),
+  //         child: Container(
+  //           child: const ModelViewer(
+  //             src: 'avatars/BusinessCard3D.glb',
+  //             autoRotate: false,
+  //             ar: true,
+  //             cameraControls: true,
+  //         ),
+  //         )
   //         ),
   //         ),
   //
