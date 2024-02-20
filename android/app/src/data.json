@@ -1,0 +1,58 @@
+{
+  "Users": {
+    "user_id_1": {
+      "First_Name": "John",
+      "Last_Name": "Doe",
+      "User_Password": "encrypted_password",
+      "User_Email": "john.doe@example.com",
+      "Business_Card": "card_id_1"
+    },
+    "user_id_2": {
+      "First_Name": "Jane",
+      "Last_Name": "Doe",
+      "User_Password": "encrypted_password",
+      "User_Email": "jane.doe@example.com",
+      "Business_Card": "card_id_2"
+    }
+  },
+
+  "Business_Cards": {
+    "card_id_1": {
+      "Phone_Number": "123456789",
+      "User_ID": "user_id_1",
+      "Job_Title": "Software Developer",
+      "Card_Avatar_Type": "type1",
+      "Profiles": {
+        "profile_id_1": true,
+        "profile_id_2": true
+      }
+    },
+    "card_id_2": {
+      "Phone_Number": "987654321",
+      "User_ID": "user_id_2",
+      "Job_Title": "Graphic Designer",
+      "Card_Avatar_Type": "type2",
+      "Profiles": {
+        "profile_id_3": true
+      }
+    }
+  },
+
+  "Profiles": {
+    "profile_id_1": {
+      "Profile_Name": "LinkedIn",
+      "Profile_Link": "https://www.linkedin.com/in/johndoe",
+      "Card_ID": "card_id_1"
+    },
+    "profile_id_2": {
+      "Profile_Name": "GitHub",
+      "Profile_Link": "https://github.com/johndoe",
+      "Card_ID": "card_id_1"
+    },
+    "profile_id_3": {
+      "Profile_Name": "LinkedIn",
+      "Profile_Link": "https://www.linkedin.com/in/janedoe",
+      "Card_ID": "card_id_2"
+    }
+  }
+}
