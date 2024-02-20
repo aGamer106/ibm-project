@@ -8,25 +8,21 @@ class QueryFunctions {
   }
 
   // Function to get UserID based on User_Email
-  static Future<String?> getUserId(String userEmail) async {
+  static Future<String?> getCardID(String userEmail) async {
     try {
       DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 
       // Query the database to find the user node with the matching email
       DatabaseEvent snapshot = await dbRef.child('Users').orderByChild('User_Email/Value').equalTo(userEmail).once();
 
-      Map<dynamic, dynamic>? users = snapshot.snapshot.value as Map<dynamic, dynamic>?;
+      String? businessCardID = snapshot.snapshot.child('Business_Card').value.toString();
 
-      if (users == null || users.isEmpty) {
+      if (businessCardID == null || businessCardID.isEmpty) {
         print("No user found with email: $userEmail");
         return null;
+      }else{
+        return businessCardID;
       }
-
-      String? userID;
-
-      users.forEach((key, value) {
-        userID = key;
-      });
     } catch (error) {
       // Handle any errors that occur during the database operation
       print("Error retrieving user ID: $error");

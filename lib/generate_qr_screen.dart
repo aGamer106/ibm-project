@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'card.dart';
+import 'profile.dart';
 
 class GenerateQRScreen extends StatelessWidget {
   const GenerateQRScreen({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class GenerateQRScreen extends StatelessWidget {
               'Testing QR Creation',
             ),
             QrImageView(
-              data: businessCard.getUserID().toString(),
+              data: businessCard.getCardID().toString(),
               version: QrVersions.auto,
               size: 200.0,
             ),

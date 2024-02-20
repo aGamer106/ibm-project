@@ -12,6 +12,7 @@ import 'card.dart';
 import 'generate_qr_screen.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:math';
+import 'profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,10 @@ void main() async {
           messagingSenderId: '191934931736',
           projectId: 'ibm-group-c')
   );
+
+  String? businessCard = await QueryFunctions.getCardID("rzvn@example.com");
+  print("Business card ID:" + businessCard!);
+
   runApp(const MyApp());
 }
 
@@ -142,8 +147,7 @@ class RelTimeData extends StatelessWidget {
                     return Card(
                       color: Colors.white10,
                       child: ListTile(
-                        title: Text(snapshot.child('User_Email').value.toString()),
-                        subtitle: Text(snapshot.child('Last_Name').value.toString()),
+                        title: Text(snapshot.child('Business_Card').value.toString()),
                         trailing: Text(snapshot.child('First_Name').value.toString()),
                       ),
                     );
