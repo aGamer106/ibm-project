@@ -46,6 +46,8 @@ dependencies:
   firebase_core: ^2.25.4
   cloud_firestore: ^4.3.2
   firebase_database: ^10.1.0
+  firebase_auth: ^4.17.4
+  firebase_storage: ^11.6.6
 
 #dependency_overrides:
 #  url_launcher: '5.4.0'
