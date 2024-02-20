@@ -142,9 +142,9 @@ class RelTimeData extends StatelessWidget {
                     return Card(
                       color: Colors.white10,
                       child: ListTile(
-                        title: Text(snapshot.child('User_Email').value.toString()),
+                        title: Text(snapshot.child('First_Name').value.toString()),
                         subtitle: Text(snapshot.child('Last_Name').value.toString()),
-                        trailing: Text(snapshot.child('First_Name').value.toString()),
+                        trailing: Text(snapshot.child('User_Email').value.toString()),
                       ),
                     );
                   }
@@ -165,4 +165,4 @@ class RelTimeData extends StatelessWidget {
 
 //1. push test data onto the database, using the push() function so that it generates a new UUID
 // - wanna push a User, a Business Card, and a Profile
-//2. once we figure out how to access a record by its UUID
+//2. once we figure out how to access a record by its UUID - Ibrahim
