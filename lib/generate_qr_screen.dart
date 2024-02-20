@@ -20,7 +20,7 @@ class GenerateQRScreen extends StatelessWidget {
               'Testing QR Creation',
             ),
             QrImageView(
-              data: businessCard.getCardID().toString(),
+              data: "1",
               version: QrVersions.auto,
               size: 200.0,
             ),
