@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'card.dart';
 import 'generate_qr_screen.dart';
+import 'profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,8 @@ void main() async {
           messagingSenderId: '191934931736',
           projectId: 'ibm-group-c')
   );
+  String? UserID = await QueryFunctions.getUserId("rzvn@example.com");
+  print("UserID: $UserID");
   runApp(const MyApp());
 }
 
@@ -116,9 +119,10 @@ class RelTimeData extends StatelessWidget {
                     return Card(
                       color: Colors.white10,
                       child: ListTile(
-                        title: Text(snapshot.child('User_Email').value.toString()),
+                        title: Text(snapshot.child(uuid).value.toString()),
                         subtitle: Text(snapshot.child('Last_Name').value.toString()),
-                        trailing: Text(snapshot.child('First_Name').value.toString()),
+                        trailing: Text("test"),
+
                       ),
                     );
                   }
