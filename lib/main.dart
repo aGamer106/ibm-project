@@ -4,12 +4,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:untitled/submit_data_form.dart';
 import 'qr_scanner_overlay.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'card.dart';
 import 'generate_qr_screen.dart';
-import 'profile.dart';
+import 'package:uuid/uuid.dart';
+import 'dart:math';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +23,6 @@ void main() async {
           messagingSenderId: '191934931736',
           projectId: 'ibm-group-c')
   );
-  String? UserID = await QueryFunctions.getUserId("rzvn@example.com");
-  print("UserID: $UserID");
   runApp(const MyApp());
 }
 
@@ -36,6 +36,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -83,19 +85,40 @@ class _MyHomePageState extends State<MyHomePage> {
           QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5)),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => RelTimeData()),
-          );
-        },
-        child: const Icon(Icons.data_object)
+      floatingActionButton: Stack(
+        children: <Widget>[
+          Positioned(
+            right: 30,
+            bottom: 80,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InsertDataPage()),
+                );
+              },
+              child: Icon(Icons.add),
+            ),
+          ),
+          Positioned(
+            left: 30,
+            bottom: 80,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RelTimeData()),
+                );
+              },
+              child: const Icon(Icons.data_object),
+            ),
+          ),
+        ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat, // Positions the button to the bottom left corner.
     );
   }
 }
+
 
 
 class RelTimeData extends StatelessWidget {
@@ -119,10 +142,9 @@ class RelTimeData extends StatelessWidget {
                     return Card(
                       color: Colors.white10,
                       child: ListTile(
-                        title: Text(snapshot.child(uuid).value.toString()),
+                        title: Text(snapshot.child('User_Email').value.toString()),
                         subtitle: Text(snapshot.child('Last_Name').value.toString()),
-                        trailing: Text("test"),
-
+                        trailing: Text(snapshot.child('First_Name').value.toString()),
                       ),
                     );
                   }
@@ -139,3 +161,8 @@ class RelTimeData extends StatelessWidget {
 //write 2 functions
 //1. Function that returns the User ID
 //2. A function that takes the user ID and prints out to the screen the business card
+
+
+//1. push test data onto the database, using the push() function so that it generates a new UUID
+// - wanna push a User, a Business Card, and a Profile
+//2. once we figure out how to access a record by its UUID
