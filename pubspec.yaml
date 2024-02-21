@@ -48,6 +48,9 @@ dependencies:
   firebase_database: ^10.1.0
   firebase_auth: ^4.17.4
   firebase_storage: ^11.6.6
+  audioplayers: ^5.2.1
+  flutter_tts: ^3.3.3
+
 
 #dependency_overrides:
 #  url_launcher: '5.4.0'

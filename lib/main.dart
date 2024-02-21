@@ -3,6 +3,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:untitled/submit_data_form.dart';
 import 'qr_scanner_overlay.dart';
@@ -144,17 +145,44 @@ class RelTimeData extends StatelessWidget {
                       child: ListTile(
                         title: Text(snapshot.child('First_Name').value.toString()),
                         subtitle: Text(snapshot.child('Last_Name').value.toString()),
-                        trailing: Text(snapshot.child('User_Email').value.toString()),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min, // This is needed to keep the Row tight around its children
+                          children: [
+                            Text(snapshot.child('User_Email').value.toString()), // Assuming you still want to display this here
+                            IconButton(
+                              icon: Icon(Icons.volume_up),
+                              onPressed: () async {
+                                final tts = FlutterTts();
+                                String userDetail = "First Name: ${snapshot.child('First_Name').value}, Last Name: ${snapshot.child('Last_Name').value}, Email: ${snapshot.child('User_Email').value}";
+                                await tts.setLanguage("en-UK");
+                                await tts.setPitch(1);
+                                await tts.speak(userDetail);
+                                // Here, instead of just speaking, you'd also generate and upload the audio file, see Step 3.
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }
               )
+
           ),
         ],
       ),
     );
   }
 }
+
+class TextToSpeech extends StatelessWidget {
+  const TextToSpeech({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
 
 
 
