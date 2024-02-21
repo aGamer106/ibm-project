@@ -2,6 +2,7 @@ import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector64;
 import 'package:audioplayers/audioplayers.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArScreen extends StatefulWidget {
   const ArScreen({super.key});
@@ -91,6 +92,16 @@ class _ArScreenState extends State<ArScreen>
     audioPlayer.play(AssetSource('john.mp3'));
   }
 
+  _launchURL(String url) async {
+    final url1 = Uri.parse(url);
+    launchUrl(url1);
+    // if (await canLaunch(url)) {
+    //   await launch(url);
+    // } else {
+    //   throw 'Could not launch $url';
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,15 +139,19 @@ class _ArScreenState extends State<ArScreen>
           ),
         ],
       ),
-      bottomNavigationBar: const Row(
+      bottomNavigationBar: Row(
         children: <Widget>[
           ElevatedButton(
-            onPressed: null,
-            child: Text('Hello'),
+            onPressed: () => _launchURL('https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAAAHFoQsB8wRGwfZwZF5k3KN36KwpehIrnhw&keywords=john%20mcnamara&origin=RICH_QUERY_TYPEAHEAD_HISTORY&position=0&searchId=4e356b99-c59d-4385-a2e7-31fbae90bbeb&sid=.O_&spellCorrectionEnabled=true'),
+            child: Text('LinkedIn'),
           ),
           ElevatedButton(
-            onPressed: null,
-            child: Text('Hi'),
+            onPressed: () => _launchURL("https://www.instagram.com/"),
+            child: Text('Instagram'),
+          ),
+          ElevatedButton(
+            onPressed: () => _launchURL("https://en-gb.facebook.com/"),
+            child: Text('Facebook'),
           ),
         ],
       )
