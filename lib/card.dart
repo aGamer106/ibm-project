@@ -18,36 +18,8 @@ class businessCard{
 
   void displayCard(BuildContext context){
 
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('AR Business Card'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Name: $_firstName'),
-                Text('Title: $_jobTitle'),
-                _picture, // Display picture if available
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: Text('Close'),
-              ),
-            ],
-          );
-        },
-      );
     }
 
-    static int getUserID(){
-      //query command to get userID
 
-      return 1;
-    }
 
   }

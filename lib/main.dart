@@ -25,8 +25,7 @@ void main() async {
           projectId: 'ibm-group-c')
   );
 
-print(QueryFunctions.getID("rzvn@example.com"));
-  print(QueryFunctions.getID("rzvn@example.com").toString());
+
 
   runApp(const MyApp());
 }
@@ -52,9 +51,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String>? cardData = [];
   MobileScannerController cameraController = MobileScannerController();
 
   @override
+
+
+  Future<void> fetchCardData(String? userID) async {
+    List<String>? card = await QueryFunctions.getCardData(userID);
+    setState(() {
+      cardData = card;
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -84,7 +93,9 @@ class _MyHomePageState extends State<MyHomePage> {
             controller: cameraController,
             onDetect: (barcode, args) async {
               final String? barcodeValue = barcode.rawValue;
+              await fetchCardData(barcode.rawValue);
               debugPrint('Barcode Found! $barcodeValue !');
+              print("cardData after scan: $cardData");
             },
           ),
           QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5)),

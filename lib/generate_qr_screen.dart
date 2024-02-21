@@ -16,17 +16,17 @@ class _GenerateQRScreenState extends State<GenerateQRScreen> {
   @override
   void initState() {
     super.initState();
-    fetchUserID();
+    fetchUserID('rzvn@example.com');
   }
 
-  Future<void> fetchUserID() async {
-    String userEmail = 'rzvn@example.com';
-    String? id = await QueryFunctions.getID(userEmail);
+  Future<void> fetchUserID(String email) async {
+    String? id = await QueryFunctions.getID(email);
     setState(() {
       userID = id;
     });
-
   }
+
+
 
   Widget build(BuildContext context) {
     return Scaffold(
