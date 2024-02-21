@@ -13,6 +13,7 @@ import 'card.dart';
 import 'generate_qr_screen.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:math';
+import 'profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,9 +49,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<List<String>?>? cardData = [];
   MobileScannerController cameraController = MobileScannerController();
 
   @override
+
+
+  Future<void> fetchCardData(String? userID) async {
+    List<List<String>?>? card = await QueryFunctions.getCardData(userID);
+    setState(() {
+      cardData = card;
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -80,7 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
             controller: cameraController,
             onDetect: (barcode, args) async {
               final String? barcodeValue = barcode.rawValue;
+              await fetchCardData(barcode.rawValue);
               debugPrint('Barcode Found! $barcodeValue !');
+              print("cardData after scan: $cardData");
+              String? profile = cardData![1]?[0];
+              List<String>? details = await QueryFunctions.getProfile(profile);
+              print(profile);
+              print(details);
             },
           ),
           QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5)),
@@ -143,7 +160,7 @@ class RelTimeData extends StatelessWidget {
                     return Card(
                       color: Colors.white10,
                       child: ListTile(
-                        title: Text(snapshot.child('First_Name').value.toString()),
+                        title: Text(snapshot.child('User_Email').value.toString()),
                         subtitle: Text(snapshot.child('Last_Name').value.toString()),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min, // This is needed to keep the Row tight around its children
@@ -166,23 +183,12 @@ class RelTimeData extends StatelessWidget {
                     );
                   }
               )
-
           ),
         ],
       ),
     );
   }
 }
-
-class TextToSpeech extends StatelessWidget {
-  const TextToSpeech({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
-
 
 
 
@@ -193,4 +199,4 @@ class TextToSpeech extends StatelessWidget {
 
 //1. push test data onto the database, using the push() function so that it generates a new UUID
 // - wanna push a User, a Business Card, and a Profile
-//2. once we figure out how to access a record by its UUID - Ibrahim
+//2. once we figure out how to access a record by its UUID

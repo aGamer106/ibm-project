@@ -1,11 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'card.dart';
+import 'profile.dart';
 
-class GenerateQRScreen extends StatelessWidget {
+class GenerateQRScreen extends StatefulWidget {
   const GenerateQRScreen({Key? key}) : super(key: key);
 
   @override
+  _GenerateQRScreenState createState() => _GenerateQRScreenState();
+}
+
+class _GenerateQRScreenState extends State<GenerateQRScreen> {
+   //initialize userID variable
+  String? userID = "";
+  @override
+  void initState() {
+    super.initState();
+    fetchUserID('rzvn@example.com');
+  }
+
+  Future<void> fetchUserID(String email) async {
+    String? id = await QueryFunctions.getID(email);
+    setState(() {
+      userID = id;
+    });
+  }
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -19,7 +41,7 @@ class GenerateQRScreen extends StatelessWidget {
               'Testing QR Creation',
             ),
             QrImageView(
-              data: businessCard.getUserID().toString(),
+              data: userID.toString(),
               version: QrVersions.auto,
               size: 200.0,
             ),

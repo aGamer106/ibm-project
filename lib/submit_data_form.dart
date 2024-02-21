@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:math';
+import 'profile.dart';
 
 class InsertDataPage extends StatefulWidget {
   @override
@@ -14,6 +15,8 @@ class _InsertDataPageState extends State<InsertDataPage> {
   String _firstName = '';
   String _lastName = '';
   String _email = '';
+
+
 
   //use a static password for now, will be updated as we go
   String _password = 'Random1234';
