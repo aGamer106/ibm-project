@@ -3,15 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'qr_scanner_overlay.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'card.dart';
 import 'generate_qr_screen.dart';
+import 'text_to_speech.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: FirebaseOptions(
+    options: const FirebaseOptions(
         apiKey: 'AIzaSyCZle2D58-dsDmpA26KkNOvU08cU-iV7S4',
         appId: '1:191934931736:android:759aef3382482a206b346d',
         messagingSenderId: '191934931736',
@@ -43,6 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
   //we need a controller for our Camera to actually work; I named it cameraController so that it's self-explanatory from the name
   MobileScannerController cameraController = MobileScannerController();
 
+  void navigateToTextToSpeechPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const TextToSpeechPage()),
+    );
+  }
+
   // get barcode => null;
 
   @override
@@ -56,10 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: (){
               Navigator.push(
                 context, 
-                MaterialPageRoute(builder: (context) => GenerateQRScreen()),
+                MaterialPageRoute(builder: (context) => const GenerateQRScreen()),
               );
             },
             icon: const Icon(Icons.qr_code)
+          ),
+          IconButton(
+            onPressed: navigateToTextToSpeechPage,
+            icon: const Icon(Icons.volume_up)
           ),
 
           IconButton(onPressed: (){cameraController.switchCamera();
