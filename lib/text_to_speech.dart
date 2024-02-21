@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-//TODO: Connect Watson API to REST API
-
 class TextToSpeechPage extends StatelessWidget {
   const TextToSpeechPage({Key? key}) : super(key: key);
 
@@ -255,6 +253,8 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
   }
+
+  //TODO: Connect Watson API
 
   /*
   void _speak() async {
