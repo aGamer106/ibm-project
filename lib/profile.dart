@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -8,25 +9,21 @@ class QueryFunctions {
   }
 
   // Function to get UserID based on User_Email
-  static Future<String?> getCardID(String userEmail) async {
-    try {
-      DatabaseReference dbRef = FirebaseDatabase.instance.ref();
-
-      // Query the database to find the user node with the matching email
-      DatabaseEvent snapshot = await dbRef.child('Users').orderByChild('User_Email/Value').equalTo(userEmail).once();
-
-      String? businessCardID = snapshot.snapshot.child('Business_Card').value.toString();
-
-      if (businessCardID == null || businessCardID.isEmpty) {
-        print("No user found with email: $userEmail");
-        return null;
-      }else{
-        return businessCardID;
+  static Future<String?> getID(String userEmail) async {
+    final ref = FirebaseDatabase.instance.ref();
+    final snapshot = await ref.child('AppDB/Users').get();
+    if (snapshot.exists) {
+      for (var entry in (snapshot.value as Map<dynamic, dynamic>).entries) {
+        if (entry.value['User_Email'] == userEmail) {
+          return entry.key;
+        }
       }
-    } catch (error) {
-      // Handle any errors that occur during the database operation
-      print("Error retrieving user ID: $error");
-      return null;
+    } else {
+      print('No data available.');
     }
+    return null;
+    }
+
+
+
   }
-}

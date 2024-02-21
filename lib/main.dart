@@ -12,6 +12,7 @@ import 'card.dart';
 import 'generate_qr_screen.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:math';
+import 'profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,10 @@ void main() async {
           messagingSenderId: '191934931736',
           projectId: 'ibm-group-c')
   );
+
+print(QueryFunctions.getID("rzvn@example.com"));
+  print(QueryFunctions.getID("rzvn@example.com").toString());
+
   runApp(const MyApp());
 }
 
