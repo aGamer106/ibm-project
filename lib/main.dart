@@ -166,23 +166,12 @@ class RelTimeData extends StatelessWidget {
                     );
                   }
               )
-
           ),
         ],
       ),
     );
   }
 }
-
-class TextToSpeech extends StatelessWidget {
-  const TextToSpeech({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
-
 
 
 
