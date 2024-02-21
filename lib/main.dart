@@ -51,14 +51,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String>? cardData = [];
+  List<List<String>?>? cardData = [];
   MobileScannerController cameraController = MobileScannerController();
 
   @override
 
 
   Future<void> fetchCardData(String? userID) async {
-    List<String>? card = await QueryFunctions.getCardData(userID);
+    List<List<String>?>? card = await QueryFunctions.getCardData(userID);
     setState(() {
       cardData = card;
     });
@@ -96,6 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
               await fetchCardData(barcode.rawValue);
               debugPrint('Barcode Found! $barcodeValue !');
               print("cardData after scan: $cardData");
+              String? profile = cardData![1]?[0];
+              List<String>? details = await QueryFunctions.getProfile(profile);
+              print(profile);
+              print(details);
             },
           ),
           QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5)),
