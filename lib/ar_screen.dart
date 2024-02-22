@@ -102,7 +102,8 @@ class _ArScreenState extends State<ArScreen>
   }
 
   _launchMailto(String address) async {
-    final mailtoLink = Uri.parse('mailto:$address');
+    final mailtoLink = Uri.parse('mailto:$address?subject=Interested in Your Services&body=Hello, '
+        'I found your business card and am interested in the services you offer. I believe there is potential for a beneficial engagement and would like to discuss how we can work together. Please let me know a convenient time for a conversation.');
     try {
       await launchUrl(mailtoLink);
     } catch (e) {
