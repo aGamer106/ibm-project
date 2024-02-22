@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector64;
 import 'package:audioplayers/audioplayers.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ArScreen extends StatefulWidget {
   const ArScreen({super.key});
@@ -11,150 +12,66 @@ class ArScreen extends StatefulWidget {
   State<ArScreen> createState() => _ArScreenState();
 }
 
-class _ArScreenState extends State<ArScreen>
-{
-  bool isClicked = false;
-  bool isAvatarClicked = false;
+class _ArScreenState extends State<ArScreen> {
   ArCoreController? coreController;
-  augmentedRealityViewCreated(ArCoreController controller)
-  {
-    coreController = controller;
 
-    displayCube(coreController!);
-    displaySphere(coreController!);
-    displayAvatar(coreController!);
+  @override
+  void dispose() {
+    coreController?.dispose();
+    super.dispose();
   }
 
-  displayCube(ArCoreController controller)
-  {
-    final materials = ArCoreMaterial(
-      color: isClicked ? Colors.red : Colors.indigo,
-      metallic: 2,
-    );
+  void augmentedRealityViewCreated(ArCoreController controller) {
+    coreController = controller;
+    // loadAsset();
+    displayCube(controller);
+    print('ARCore Controller is initialized');
+    displayModelWithArCoreReferenceNode(controller);
+  }
 
+  void displayCube(ArCoreController controller) {
+    final material = ArCoreMaterial(color: Colors.blue);
     final cube = ArCoreCube(
-        size: vector64.Vector3(0.5,0.5,0.5),
-        materials: [materials],
+      materials: [material],
+      size: vector64.Vector3(0.1, 0.1, 0.1), // Define the size of the cube
     );
 
     final node = ArCoreNode(
       shape: cube,
-      position: vector64.Vector3(-0.5,0.5,-3.5),
-      name: 'cube',
+      position: vector64.Vector3(0, 0, -1), // Place the cube in front of the camera
     );
 
-
-    coreController!.addArCoreNode(node);
+    controller.addArCoreNode(node);
   }
 
-  displaySphere(ArCoreController controller)
-  {
-    final materials = ArCoreMaterial(
-      color: isAvatarClicked ? Colors.red : Colors.indigo,
-      metallic: 2,
+  // You can use this method later to display your image as texture
+  void displayModelWithArCoreReferenceNode(ArCoreController controller) {
+    print('Attempting to display 3D model...');
+    final node = ArCoreReferenceNode(
+      name: "Card", // The name of your 3D model file
+      object3DFileName: "avatars/Astro&Card.glb", // Path to your 3D model file
+      position: vector64.Vector3(0, 0, -1), // Adjust position as needed
+      scale: vector64.Vector3.all(1.0), // Adjust scale as needed
     );
 
-
-    final sphere = ArCoreSphere(
-      radius: 0.2,
-      materials: [materials],
-    );
-
-    final node = ArCoreNode(
-      shape: sphere,
-      position: vector64.Vector3(-0.5,0.5,-1.0),
-    );
-
-    coreController!.addArCoreNode(node);
-  }
-
-  displayAvatar(ArCoreController controller)
-  {
-    final materials = ArCoreMaterial(
-      color: isAvatarClicked ? Colors.red : Colors.indigo,
-      metallic: 2,
-    );
-
-
-    final avatar = ArCoreReferenceNode(
-      name: "Astronaut",
-      object3DFileName: 'avatars/Astronaut.glb',
-      position: vector64.Vector3(-0.5,0.5,-2.0),
-      scale: vector64.Vector3(0.2, 0.2, 0.2),
-    );
-
-    coreController!.addArCoreNode(avatar);
-  }
-
-  void outputAudio()
-  {
-    final audioPlayer = AudioPlayer();
-    audioPlayer.play(AssetSource('john.mp3'));
-  }
-
-  _launchURL(String url) async {
-    final url1 = Uri.parse(url);
-    launchUrl(url1);
-    // if (await canLaunch(url)) {
-    //   await launch(url);
-    // } else {
-    //   throw 'Could not launch $url';
-    // }
+    controller.addArCoreNode(node).then((_) {
+      print('3D model added successfully');
+    }).catchError((e) {
+      print("Error adding AR node: $e");
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "AR Screen"
-        ),
+        title: const Text("AR Screen"),
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          ArCoreView(
-            onArCoreViewCreated: augmentedRealityViewCreated,
-            enableTapRecognizer: true,
-          ),
-          GestureDetector(
-            // onTap: () {
-            //   setState(() {
-            //     isClicked = !isClicked; // Toggle the click state
-            //     augmentedRealityViewCreated(coreController!);
-            //   });
-            // },
-            onDoubleTap: (){
-              setState(() {
-                isAvatarClicked = !isAvatarClicked;
-                if(isAvatarClicked == true)
-                {
-                  outputAudio();
-                }
-                augmentedRealityViewCreated(coreController!);
-
-              });
-            },
-            behavior: HitTestBehavior.opaque,
-          ),
-        ],
+      body: ArCoreView(
+        onArCoreViewCreated: augmentedRealityViewCreated,
+        enableTapRecognizer: true, // If you want to handle tap gestures in the AR view
       ),
-      bottomNavigationBar: Row(
-        children: <Widget>[
-          ElevatedButton(
-            onPressed: () => _launchURL('https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAAAHFoQsB8wRGwfZwZF5k3KN36KwpehIrnhw&keywords=john%20mcnamara&origin=RICH_QUERY_TYPEAHEAD_HISTORY&position=0&searchId=4e356b99-c59d-4385-a2e7-31fbae90bbeb&sid=.O_&spellCorrectionEnabled=true'),
-            child: Text('LinkedIn'),
-          ),
-          ElevatedButton(
-            onPressed: () => _launchURL("https://www.instagram.com/"),
-            child: Text('Instagram'),
-          ),
-          ElevatedButton(
-            onPressed: () => _launchURL("https://en-gb.facebook.com/"),
-            child: Text('Facebook'),
-          ),
-        ],
-      )
     );
   }
 }
