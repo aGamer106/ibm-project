@@ -101,6 +101,16 @@ class _ArScreenState extends State<ArScreen>
     launchUrl(url1);
   }
 
+  _launchMailto(String address) async {
+    final mailtoLink = Uri.parse('mailto:$address');
+    try {
+      await launchUrl(mailtoLink);
+    } catch (e) {
+      // Handle any errors (e.g., if the user's device doesn't support email)
+      print('Could not launch $mailtoLink');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,7 +156,7 @@ class _ArScreenState extends State<ArScreen>
         color: Colors.pink,
         size: 60,
       ),
-            onPressed: () => _launchURL(''),
+            onPressed: () =>_launchMailto('j0nnymac@uk.ibm.com'),
           ),
           IconButton(
             icon: Icon(
