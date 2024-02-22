@@ -24,8 +24,8 @@ class _ArScreenState extends State<ArScreen>
   {
     coreController = controller;
 
-    displayCube(coreController!);
-    displaySphere(coreController!);
+    //displayCube(coreController!);
+    //displaySphere(coreController!);
     displayAvatar(coreController!);
   }
 
@@ -123,6 +123,12 @@ class _ArScreenState extends State<ArScreen>
             onArCoreViewCreated: augmentedRealityViewCreated,
             enableTapRecognizer: true,
           ),
+
+          ModelViewer(
+            src: 'avatars/Astro&Card.glb',
+            autoRotate: false,
+            interactionPrompt: InteractionPrompt.none,
+          ),
           GestureDetector(
             // onTap: () {
             //   setState(() {
@@ -143,6 +149,7 @@ class _ArScreenState extends State<ArScreen>
             },
             behavior: HitTestBehavior.opaque,
           ),
+
         ],
       ),
       bottomNavigationBar: Row(
