@@ -4,6 +4,7 @@ import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:vector_math/vector_math_64.dart' as vector64;
 import 'package:audioplayers/audioplayers.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ArScreen extends StatefulWidget {
   const ArScreen({super.key});
@@ -111,10 +112,10 @@ class _ArScreenState extends State<ArScreen>
       ),
       body: Stack(
         children: [
-          ArCoreView(
-            onArCoreViewCreated: augmentedRealityViewCreated,
-            enableTapRecognizer: true,
-          ),
+          // ArCoreView(
+          //   onArCoreViewCreated: augmentedRealityViewCreated,
+          //   enableTapRecognizer: true,
+          // ),
           GestureDetector(
             // onTap: () {
             //   setState(() {
@@ -151,11 +152,11 @@ class _ArScreenState extends State<ArScreen>
             onPressed: () => _launchURL("https://en-gb.facebook.com/"),
             child: const Text('Facebook'),
           ),
-          // IconButton(
-          //   icon: Image.asset('assets/LinkedInLogo.jfif'),
-          //   iconSize: 2,
-          //   onPressed: () => _launchURL('https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAAAHFoQsB8wRGwfZwZF5k3KN36KwpehIrnhw&keywords=john%20mcnamara&origin=RICH_QUERY_TYPEAHEAD_HISTORY&position=0&searchId=4e356b99-c59d-4385-a2e7-31fbae90bbeb&sid=.O_&spellCorrectionEnabled=true'),
-          // )
+          IconButton(
+            icon: Image.asset('assets/LinkedInLogo.jfif'),
+            iconSize: 2,
+            onPressed: () => _launchURL('https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAAAHFoQsB8wRGwfZwZF5k3KN36KwpehIrnhw&keywords=john%20mcnamara&origin=RICH_QUERY_TYPEAHEAD_HISTORY&position=0&searchId=4e356b99-c59d-4385-a2e7-31fbae90bbeb&sid=.O_&spellCorrectionEnabled=true'),
+          )
         ],
       )
     );
