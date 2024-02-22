@@ -53,12 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
   //we need a controller for our Camera to actually work; I named it cameraController so that it's self-explanatory from the name
   MobileScannerController cameraController = MobileScannerController();
 
-  void navigateToTextToSpeechPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const TextToSpeechPage()),
-    );
-  }
+  // void navigateToTextToSpeechPage() {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => const TextToSpeechPage()),
+  //   );
+  // }
 
   // get barcode => null;
 
