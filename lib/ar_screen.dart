@@ -4,7 +4,7 @@ import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:vector_math/vector_math_64.dart' as vector64;
 import 'package:audioplayers/audioplayers.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class ArScreen extends StatefulWidget {
   const ArScreen({super.key});
