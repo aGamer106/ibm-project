@@ -74,20 +74,16 @@ class _ArScreenState extends State<ArScreen>
 
   displayAvatar(ArCoreController controller)
   {
-    final materials = ArCoreMaterial(
-      color: isAvatarClicked ? Colors.red : Colors.indigo,
-      metallic: 2,
-    );
-
-
     final avatar = ArCoreReferenceNode(
       name: "Astronaut",
       object3DFileName: 'avatars/Astronaut.glb',
       position: vector64.Vector3(-0.5,0.5,-2.0),
-      scale: vector64.Vector3(0.2, 0.2, 0.2),
+      scale: vector64.Vector3(5, 5, 5),
     );
 
+    print("Avatar adding...");
     coreController!.addArCoreNode(avatar);
+    print("Avatar added");
   }
 
   void outputAudio()
@@ -123,10 +119,10 @@ class _ArScreenState extends State<ArScreen>
       ),
       body: Stack(
         children: [
-          // ArCoreView(
-          //   onArCoreViewCreated: augmentedRealityViewCreated,
-          //   enableTapRecognizer: true,
-          // ),
+          ArCoreView(
+            onArCoreViewCreated: augmentedRealityViewCreated,
+            enableTapRecognizer: true,
+          ),
           GestureDetector(
             // onTap: () {
             //   setState(() {
