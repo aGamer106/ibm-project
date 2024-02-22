@@ -268,7 +268,7 @@ class RelTimeData extends StatelessWidget {
                               icon: Icon(Icons.volume_up),
                               onPressed: () async {
                                 // final tts = FlutterTts();
-                                String userDetail = "First Name: ${snapshot.child('First_Name').value}, Last Name: ${snapshot.child('Last_Name').value}, Email: ${snapshot.child('User_Email').value}";
+                                String userDetail = " ${snapshot.child('First_Name').value},  ${snapshot.child('Last_Name').value}, and my email address is: ${snapshot.child('User_Email').value}";
                                 await callWatsonTextToSpeechAndUploadToFirebase(userDetail);
                                 // await tts.setLanguage("en-UK");
                                 // await tts.setPitch(1);
