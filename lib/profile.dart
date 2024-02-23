@@ -25,35 +25,23 @@ class QueryFunctions {
     }
 
 
-  static Future<List<List<String>?>?> getCardData(String? userID) async {
+  static Future<List<String>?> getCardData(String? userID) async {
     try {
       final ref = FirebaseDatabase.instance.ref();
-      final snapshot = await ref.child('AppDB/Business_Cards').get();
+      final snapshot = await ref.child('AppDB/BusinessCard').get();
 
       if (snapshot.exists) {
-        List<List<String>> res = [];
-
+        List<String> data = [];
         for (var entry in (snapshot.value as Map<dynamic, dynamic>).entries) {
           // Check if the 'User_ID' field matches the provided userID
           if (entry.value['User_ID'] == userID) {
             // If matched, extract the required fields and add them to the result list
-            List<String> data = [];
-            data.add(entry.value['Card_Avatar_Type'] ?? "");
+
             data.add(entry.value['Job_Title'] ?? "");
             data.add(entry.value['Phone_Number'] ?? "");
 
-            List<String> profileIDs = [];
-            if(entry.value['Profiles'] != null){
-              List<String> profileIDs = [];
-              (entry.value['Profiles'] as Map<dynamic, dynamic>).forEach((key, value) {
-                  profileIDs.add(value);
 
-              });
-              res.add(data);
-              res.add(profileIDs);
-
-            }
-            return res;
+            return data;
           }
         }
         print('No business card available for user with ID: $userID');

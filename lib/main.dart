@@ -22,6 +22,7 @@ import 'generate_qr_screen.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:math';
 import 'profile.dart';
+import 'ar_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -147,14 +148,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<List<String>?>? cardData = [];
+  List<String>? cardData = [];
   MobileScannerController cameraController = MobileScannerController();
 
   @override
 
 
   Future<void> fetchCardData(String? userID) async {
-    List<List<String>?>? card = await QueryFunctions.getCardData(userID);
+    List<String>? card = await QueryFunctions.getCardData(userID);
     setState(() {
       cardData = card;
     });
@@ -192,10 +193,9 @@ class _MyHomePageState extends State<MyHomePage> {
               await fetchCardData(barcode.rawValue);
               debugPrint('Barcode Found! $barcodeValue !');
               print("cardData after scan: $cardData");
-              String? profile = cardData![1]?[0];
-              List<String>? details = await QueryFunctions.getProfile(profile);
-              print(profile);
-              print(details);
+
+
+
             },
           ),
           QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5)),

@@ -15,6 +15,8 @@ class _InsertDataPageState extends State<InsertDataPage> {
   String _firstName = '';
   String _lastName = '';
   String _email = '';
+  String _job_Title = '';
+  String _Phone_Number = '';
 
 
 
@@ -27,17 +29,26 @@ class _InsertDataPageState extends State<InsertDataPage> {
       _formKey.currentState!.save();
       var uuid = Uuid();
 
-      //Users entry here
+      // Users entry here
+      final userRef = dbRef.child('AppDB/Users').push();
       final userEntry = {
         "First_Name": _firstName,
         "Last_Name": _lastName,
         "User_Email": _email,
         "User_Password": _password, //USE FIREBASE AUTH TO HANDLE PASSWORDS SECURELY
-        "Business_Card": uuid.v4(), //generate a new UUID for each user
       };
-      dbRef.child('AppDB/Users').push().set(userEntry);
+      final userID = userRef.key; // Get the generated user ID
+      userRef.set(userEntry); // Push user entry to Users node
 
-      //get back to the previous screen after submission
+      // Business card entry here
+      final cardEntry = {
+        "Job_Title": _job_Title,
+        "Phone_Number": _Phone_Number,
+        "User_ID": userID, // Use the generated user ID as the User_ID
+      };
+      dbRef.child('AppDB/BusinessCard').push().set(cardEntry); // Push card entry to BusinessCard node
+
+      // Get back to the previous screen after submission
       Navigator.of(context).pop();
     }
   }
@@ -84,6 +95,30 @@ class _InsertDataPageState extends State<InsertDataPage> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your email';
+                  }
+                  return null; // Indicates the input is valid
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Job Title'),
+                onSaved: (value) {
+                  _job_Title = value!;
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your Job Title';
+                  }
+                  return null; // Indicates the input is valid
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'phone number'),
+                onSaved: (value) {
+                  _Phone_Number = value!;
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your phone number';
                   }
                   return null; // Indicates the input is valid
                 },

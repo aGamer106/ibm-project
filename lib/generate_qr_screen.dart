@@ -16,7 +16,7 @@ class _GenerateQRScreenState extends State<GenerateQRScreen> {
   @override
   void initState() {
     super.initState();
-    fetchUserID('rzvn@example.com');
+    fetchUserID('three@gmail.com');
   }
 
   Future<void> fetchUserID(String email) async {
