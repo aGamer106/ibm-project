@@ -37,8 +37,8 @@ class _ArScreenState extends State<ArScreen>
     );
 
     final cube = ArCoreCube(
-      size: vector64.Vector3(0.5,0.5,0.5),
-      materials: [materials],
+        size: vector64.Vector3(0.5,0.5,0.5),
+        materials: [materials],
     );
 
     final node = ArCoreNode(
@@ -111,91 +111,91 @@ class _ArScreenState extends State<ArScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-              "AR Screen"
+      appBar: AppBar(
+        title: const Text(
+          "AR Screen"
+        ),
+        centerTitle: true,
+      ),
+      body: Stack(
+        children: [
+          ArCoreView(
+            onArCoreViewCreated: augmentedRealityViewCreated,
+            enableTapRecognizer: true,
           ),
-          centerTitle: true,
-        ),
-        body: Stack(
-          children: [
-            ArCoreView(
-              onArCoreViewCreated: augmentedRealityViewCreated,
-              enableTapRecognizer: true,
-            ),
 
-            ModelViewer(
-              src: 'avatars/Astro&Card.glb',
-              autoRotate: false,
-              interactionPrompt: InteractionPrompt.none,
-            ),
-            GestureDetector(
-              // onTap: () {
-              //   setState(() {
-              //     isClicked = !isClicked; // Toggle the click state
-              //     augmentedRealityViewCreated(coreController!);
-              //   });
-              // },
-              onDoubleTap: (){
-                setState(() {
-                  isAvatarClicked = !isAvatarClicked;
-                  if(isAvatarClicked == true)
-                  {
-                    outputAudio();
-                  }
-                  augmentedRealityViewCreated(coreController!);
+          ModelViewer(
+            src: 'avatars/Astro&Card.glb',
+            autoRotate: false,
+            interactionPrompt: InteractionPrompt.none,
+          ),
+          GestureDetector(
+            // onTap: () {
+            //   setState(() {
+            //     isClicked = !isClicked; // Toggle the click state
+            //     augmentedRealityViewCreated(coreController!);
+            //   });
+            // },
+            onDoubleTap: (){
+              setState(() {
+                isAvatarClicked = !isAvatarClicked;
+                if(isAvatarClicked == true)
+                {
+                  outputAudio();
+                }
+                augmentedRealityViewCreated(coreController!);
 
-                });
-              },
-              behavior: HitTestBehavior.opaque,
-            ),
+              });
+            },
+            behavior: HitTestBehavior.opaque,
+          ),
 
-          ],
-        ),
-        bottomNavigationBar: Row(
-          children: <Widget>[
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.envelope,
-                color: Colors.pink,
-                size: 60,
-              ),
-              onPressed: () =>_launchMailto('j0nnymac@uk.ibm.com'),
+        ],
+      ),
+      bottomNavigationBar: Row(
+        children: <Widget>[
+          IconButton(
+            icon: Icon(
+          FontAwesomeIcons.envelope,
+        color: Colors.pink,
+        size: 60,
+      ),
+            onPressed: () =>_launchMailto('j0nnymac@uk.ibm.com'),
+          ),
+          IconButton(
+            icon: Icon(
+              FontAwesomeIcons.globe,
+                  color:Colors.blue,
+              size: 60,
+          ),
+            onPressed: () => _launchURL("https://www.ibm.com/uk-en"),
+          ),
+          IconButton(
+            icon: Icon(
+          FontAwesomeIcons.instagram,
+        color: Colors.purpleAccent,
+        size: 60,
+      ),
+            onPressed: () => _launchURL("https://www.instagram.com/"),
+          ),
+          IconButton(
+            icon: Icon(
+          FontAwesomeIcons.facebook,
+              color: Colors.blue,
+              size: 60,
+           ),
+            onPressed: () => _launchURL("https://en-gb.facebook.com/"),
+          ),
+          IconButton(
+            icon: Icon(
+              FontAwesomeIcons.linkedin,
+              color: Colors.blue,
+              size: 60,
             ),
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.globe,
-                color:Colors.blue,
-                size: 60,
-              ),
-              onPressed: () => _launchURL("https://www.ibm.com/uk-en"),
-            ),
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.instagram,
-                color: Colors.purpleAccent,
-                size: 60,
-              ),
-              onPressed: () => _launchURL("https://www.instagram.com/"),
-            ),
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.facebook,
-                color: Colors.blue,
-                size: 60,
-              ),
-              onPressed: () => _launchURL("https://en-gb.facebook.com/"),
-            ),
-            IconButton(
-              icon: Icon(
-                FontAwesomeIcons.linkedin,
-                color: Colors.blue,
-                size: 60,
-              ),
-              onPressed: () => _launchURL('https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAAAHFoQsB8wRGwfZwZF5k3KN36KwpehIrnhw&keywords=john%20mcnamara&origin=RICH_QUERY_TYPEAHEAD_HISTORY&position=0&searchId=4e356b99-c59d-4385-a2e7-31fbae90bbeb&sid=.O_&spellCorrectionEnabled=true'),
-            )
-          ],
-        )
+            onPressed: () => _launchURL('https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAAAHFoQsB8wRGwfZwZF5k3KN36KwpehIrnhw&keywords=john%20mcnamara&origin=RICH_QUERY_TYPEAHEAD_HISTORY&position=0&searchId=4e356b99-c59d-4385-a2e7-31fbae90bbeb&sid=.O_&spellCorrectionEnabled=true'),
+          )
+        ],
+      )
     );
   }
 }
