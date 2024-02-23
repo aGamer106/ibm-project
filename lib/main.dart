@@ -195,8 +195,13 @@ class _MyHomePageState extends State<MyHomePage> {
               print("cardData after scan: $cardData");
 
 
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ArScreen()),
+                );
+              }
 
-            },
+            ,
           ),
           QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5)),
         ],
